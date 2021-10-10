@@ -1,6 +1,4 @@
-FROM python:3
-
-MAINTAINER Imad Toubal
+FROM python:3.9.7-slim-buster
 
 WORKDIR /app
 

@@ -23,6 +23,9 @@ def get_encoded_img(img):
 
 
 def retrieve_imgs_from_store():
+    """
+    Function to populate the previously uploaded section of the infer page
+    """
     past_images = []
     list_images_stored = glob(os.path.join(config.IMG_STORE, "*.pkl"))
     num_images_in_gallery = (
@@ -34,6 +37,7 @@ def retrieve_imgs_from_store():
         reverse=True,
     )[:num_images_in_gallery]
 
+    # remove older pkl files from the storage area.
     if len(list_images_stored) > 5:
         for _f in set(list_images_stored) - set(pkl_files_in_gallery):
             os.remove(os.path.join(config.IMG_STORE, _f))
@@ -68,6 +72,7 @@ def success():
         if len(files) == 0 | len(files) > 3:
             flash(f"You can only upload upto 3 images per upload", "danger")
             return redirect(url_for("index"))
+        # get previously uploaded images, along with the results
         past_imgs = retrieve_imgs_from_store()
         for img_file in files:
             img_byte = img_file.read()
@@ -80,7 +85,7 @@ def success():
             img_data = f"data:image/jpeg;base64,{encoded_img.decode('utf-8')}"
             inference, confidence = MobileNet().infer(img)
             # make a percentage with 2 decimal points
-            confidence = floor(confidence * 10000) / 100
+            confidence = round(confidence * 100, 2)
 
             # save the image + confidence pickle object in data_files
             dump(

@@ -11,8 +11,7 @@ class MobileNet:
         with open("imagenet_classes.txt") as f:
             self.classes = [line.strip() for line in f.readlines()]
 
-        # self.model = torch.hub.load('pytorch/vision', 'mobilenet_v2', pretrained=True)
-        self.model = torchvision.models.mobilenet_v2(pretrained=True)
+        self.model = torchvision.models.mobilenet_v3_small(pretrained=True)
         self.model.eval()
 
     def infer(self, input_image):
