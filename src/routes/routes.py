@@ -55,7 +55,17 @@ def retrieve_imgs_from_store():
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    sample_img = Image.open(app.config["sample_img"])
+    inference, confidence = MobileNet().infer(sample_img)
+    confidence = round(confidence * 100, 2)
+    return render_template(
+        "index.html",
+        result={
+            "name": inference,
+            "confidence": confidence,
+            "filename": config.STATIC_IMG_LOCATION,
+        },
+    )
 
 
 @app.route("/about")

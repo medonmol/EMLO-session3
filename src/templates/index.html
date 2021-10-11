@@ -40,14 +40,31 @@
       </div>
     </form>
   </div>
-  <div class="row">
-    <div class="col-sm-6 offset-sm-3 my-5">
-      <center>
-        <p class="text-muted">
-          By default, this app uses MobileNetV3 Small image classifier that was pre-trained on the ImageNet dataset.
-        </p>
-      </center>
+</div>
+<br>
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <p class="lead">Sample Result</p>
+</div>
+<div class='container'>
+  <div class='cards'>
+    <div class='col-sm thumb text-center'>
+      <img class="cards" src="{{url_for('static', filename=result['filename'])}}" width='250' , height='250'>
+      <p class="display-8"><b>{{result['name']}}</b></p>
+      <p class="mt-9">Confidence: <strong>{{result['confidence']}}%</strong></p>
     </div>
   </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3 my-5">
+    <center>
+      <p class="text-muted">
+        By default, this app uses MobileNetV3 Small image classifier that was pre-trained on the ImageNet dataset.
+      </p>
+    </center>
+  </div>
+</div>
 </div>
 {% endblock %}
