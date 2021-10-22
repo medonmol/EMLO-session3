@@ -18,7 +18,7 @@ By default, this app uses MobileNetV3 image classifier that was pre-trained on t
 
 2. Run the docker image
     ```
-    docker run -d -p 127.0.0.1:5000:80 mobilenet-classification-rubiks
+    docker run -d -p 127.0.0.1:5000:80 mobilenet-classifier-rubiks
     ```
     This will run the app on port `5000`. You can replace that with which ever port that is more suitable.
 
@@ -31,17 +31,17 @@ By default, this app uses MobileNetV3 image classifier that was pre-trained on t
     ```
 - Create a `Heroku` app
     ```
-    heroku create mobilenet-classification-rubiks
+    heroku create mobilenet-classifier-rubiks
     ```
 - Push your docker image to the Container Registry. Depending
     on the size of the image, this can take a while.
     ```
-    heroku container:push web -a mobilenet-classification-rubiks
+    heroku container:push web -a mobilenet-classifier-rubiks
     ```
 - Once the image has been pushed to the Container Registry, the app can be released using 
 
     ```
-    heroku container:release web -a  mobilenet-classification-rubiks
+    heroku container:release web -a  mobilenet-classifier-rubiks
 
     ```
 ## Built With
