@@ -7,9 +7,8 @@ import src.config as config
 from flask import flash, render_template, request, url_for
 from joblib import dump
 from PIL import Image, UnidentifiedImageError
-from src import app
+from src import app, model
 from werkzeug.utils import redirect
-from src.models import MobileNet
 from glob import glob, iglob
 from joblib import load
 
@@ -56,7 +55,7 @@ def retrieve_imgs_from_store():
 @app.route("/")
 def index():
     sample_img = Image.open(app.config["sample_img"])
-    inference, confidence = MobileNet().infer(sample_img)
+    inference, confidence = model.infer(sample_img)
     confidence = round(confidence * 100, 2)
     return render_template(
         "index.html",
@@ -93,7 +92,7 @@ def success():
                 return redirect(url_for("index"))
             encoded_img = get_encoded_img(img_byte)
             img_data = f"data:image/jpeg;base64,{encoded_img.decode('utf-8')}"
-            inference, confidence = MobileNet().infer(img)
+            inference, confidence = model.infer(img)
             # make a percentage with 2 decimal points
             confidence = round(confidence * 100, 2)
 
